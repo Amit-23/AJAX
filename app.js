@@ -18,6 +18,7 @@ getData(1,() => {
 
 */
 
+
 //Promises
 
 
@@ -127,7 +128,8 @@ asyncFunc1().then((res) => {
 */  
 
 
-//async await
+/*
+//////async await
 
 function getData(dataId){
     return new Promise ((resolve,reject) => {
@@ -150,3 +152,72 @@ async function getAllData() {
     await getData(4);
     
 }
+
+
+*/
+
+/*
+
+Promise chaining
+
+const fetchUser = () => {
+    return new Promise((resolve,reject) => {
+
+        setTimeout(() => {
+            resolve({id:1, name: "Amit Singh"});
+        },1000);
+
+    });
+};
+
+const fetchPosts = (userId) => {
+    return new Promise((resolve,reject) => {
+        setTimeout(() => {
+            if(userId == 1){
+                resolve(["Post 1","Post 2"]);
+            } else{
+                reject("Posts not found for this user.");
+            }
+
+        },1000);
+
+    });
+
+};
+
+fetchUser().then((user) => {
+    console.log("User fetched:", user);
+    return fetchPosts(user.id)
+}).then((posts) => {
+    console.log("Posts fetched",posts);
+}).catch((error)  => {
+    console.log("Error:",error);
+});
+
+*/
+
+
+
+
+const URL = "https://dog.ceo/api/breeds/image/random";
+
+
+const getFacts = async () => {
+    console.log("getting data...");
+    let response = await fetch(URL);
+    let data = await response.json();
+
+    console.log(data);
+
+    const imgSrc = document.getElementById("dogo");
+   
+    imgSrc.src = data.message;
+ 
+
+};
+
+getFacts();
+
+const imgElement = document.getElementById("dogo");
+imgElement.addEventListener("click",getFacts);
+    
